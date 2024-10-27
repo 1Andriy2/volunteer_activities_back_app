@@ -1,5 +1,4 @@
-const utils = require('@strapi/utils');
-const { ApplicationError } = utils.errors;
+const { ApplicationError } = require('@strapi/utils').errors;
 
 module.exports = {
   async loginByPhoneOrEmail(ctx) {
@@ -30,17 +29,15 @@ module.exports = {
       throw new ApplicationError('Invalid password.');
     }
 
-    // Select only safe fields for the response
-    const safeUserData = {
-      id: user.id,
-      username: user.username,
-      email: user.email,
-      phoneNumber: user.phoneNumber,
-    };
-
+    // Send the JWT and user data
     ctx.send({
       jwt: strapi.plugins['users-permissions'].services.jwt.issue({ id: user.id }),
-      user: safeUserData,
+      user: {
+        id: user.id,
+        username: user.username,
+        email: user.email,
+        phoneNumber: user.phoneNumber,
+      },
     });
   },
 };

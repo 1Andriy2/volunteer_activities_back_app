@@ -10,7 +10,7 @@ module.exports = {
 
     // Check if identifier is an email or phone number
     const isEmail = /\S+@\S+\.\S+/.test(identifier);
-    const searchCriteria = isEmail ? { email: identifier } : { phoneNumber: identifier };
+    const searchCriteria = isEmail ? { email: identifier } : { phone: identifier };
 
     // Find the user by email or phone number
     const user = await strapi.query('plugin::users-permissions.user').findOne({ where: searchCriteria });
@@ -36,7 +36,7 @@ module.exports = {
         id: user.id,
         username: user.username,
         email: user.email,
-        phoneNumber: user.phoneNumber,
+        phone: user.phone,
       },
     });
   },

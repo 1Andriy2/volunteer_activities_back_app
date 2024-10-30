@@ -1,7 +1,7 @@
 // src/api/user/controllers/auth.js
 
 const twilio = require('twilio');
-const client = twilio(process.env.TWILIO_ACCOUNT_SID, process.env.TWILIO_AUTH_TOKEN);
+const client = twilio('AC09ab0ee8d184ba5f20751bb1a9245207', '327956f8030f5ca13dbc48b21bba3ae0');
 
 module.exports = {
   async sendPhoneVerification(ctx) {

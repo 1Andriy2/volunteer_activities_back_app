@@ -416,6 +416,13 @@ export interface ApiPlacePlace extends Schema.CollectionType {
           localized: true;
         };
       }>;
+    status: Attribute.Enumeration<['active', 'completed']> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
+      Attribute.DefaultTo<'active'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     publishedAt: Attribute.DateTime;

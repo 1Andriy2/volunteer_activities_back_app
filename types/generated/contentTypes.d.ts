@@ -373,49 +373,13 @@ export interface ApiEventEvent extends Schema.CollectionType {
   options: {
     draftAndPublish: true;
   };
-  pluginOptions: {
-    i18n: {
-      localized: true;
-    };
-  };
   attributes: {
-    title: Attribute.String &
-      Attribute.Required &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    coords: Attribute.JSON &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    description: Attribute.Text &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    image: Attribute.Media &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
-    date: Attribute.DateTime &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }>;
+    title: Attribute.String & Attribute.Required;
+    coords: Attribute.JSON;
+    description: Attribute.Text;
+    image: Attribute.Media;
+    date: Attribute.DateTime;
     status: Attribute.Enumeration<['soon', 'active', 'completed']> &
-      Attribute.SetPluginOptions<{
-        i18n: {
-          localized: true;
-        };
-      }> &
       Attribute.DefaultTo<'soon'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
@@ -432,12 +396,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
-    localizations: Attribute.Relation<
-      'api::event.event',
-      'oneToMany',
-      'api::event.event'
-    >;
-    locale: Attribute.String;
   };
 }
 

@@ -22,14 +22,6 @@
     "coords": {
       "type": "json"
     },
-    "image": {
-      "type": "media",
-      "multiple": false,
-      "required": false,
-      "allowedTypes": [
-        "images"
-      ]
-    },
     "date": {
       "type": "datetime",
       "required": true
@@ -42,6 +34,13 @@
         "completed"
       ],
       "default": "soon"
+    },
+    "image": {
+      "allowedTypes": [
+        "images"
+      ],
+      "type": "media",
+      "multiple": false
     }
   }
 }

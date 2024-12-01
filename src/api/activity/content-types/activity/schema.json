@@ -42,14 +42,6 @@
       "allowedTypes": [
         "images"
       ]
-    },
-    "test": {
-      "allowedTypes": [
-        "images",
-        "files"
-      ],
-      "type": "media",
-      "multiple": true
     }
   }
 }

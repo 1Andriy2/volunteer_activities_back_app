@@ -381,6 +381,7 @@ export interface ApiActivityActivity extends Schema.CollectionType {
     status: Attribute.Enumeration<['soon', 'active', 'completed']> &
       Attribute.DefaultTo<'soon'>;
     image: Attribute.Media;
+    test: Attribute.Media;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

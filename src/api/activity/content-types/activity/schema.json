@@ -12,12 +12,36 @@
   },
   "pluginOptions": {},
   "attributes": {
-    "Title": {
+    "title": {
       "type": "string",
       "required": true
     },
     "description": {
       "type": "text"
+    },
+    "coords": {
+      "type": "json"
+    },
+    "image": {
+      "type": "media",
+      "multiple": false,
+      "required": false,
+      "allowedTypes": [
+        "images"
+      ]
+    },
+    "date": {
+      "type": "datetime",
+      "required": true
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "soon",
+        "active",
+        "completed"
+      ],
+      "default": "soon"
     }
   }
 }

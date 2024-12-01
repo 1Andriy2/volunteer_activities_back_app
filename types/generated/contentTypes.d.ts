@@ -374,8 +374,13 @@ export interface ApiActivityActivity extends Schema.CollectionType {
     draftAndPublish: false;
   };
   attributes: {
-    Title: Attribute.String & Attribute.Required;
+    title: Attribute.String & Attribute.Required;
     description: Attribute.Text;
+    coords: Attribute.JSON;
+    image: Attribute.Media;
+    date: Attribute.DateTime & Attribute.Required;
+    status: Attribute.Enumeration<['soon', 'active', 'completed']> &
+      Attribute.DefaultTo<'soon'>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

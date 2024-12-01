@@ -69,12 +69,6 @@
       "type": "string",
       "required": true,
       "unique": true
-    },
-    "places": {
-      "type": "relation",
-      "relation": "oneToMany",
-      "target": "api::place.place",
-      "mappedBy": "user"
     }
   }
 }

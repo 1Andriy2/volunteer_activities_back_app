@@ -78,7 +78,8 @@
         "soon",
         "active",
         "completed"
-      ]
+      ],
+      "default": "soon"
     }
   }
 }

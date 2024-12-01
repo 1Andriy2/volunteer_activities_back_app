@@ -392,11 +392,6 @@ export interface ApiEventEvent extends Schema.CollectionType {
           localized: true;
         };
       }>;
-    users_permissions_user: Attribute.Relation<
-      'api::event.event',
-      'oneToOne',
-      'plugin::users-permissions.user'
-    >;
     description: Attribute.Text &
       Attribute.SetPluginOptions<{
         i18n: {

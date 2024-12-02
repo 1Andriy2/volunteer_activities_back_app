@@ -380,7 +380,17 @@ export interface ApiActivityActivity extends Schema.CollectionType {
     date: Attribute.DateTime & Attribute.Required;
     status: Attribute.Enumeration<['soon', 'active', 'completed']> &
       Attribute.DefaultTo<'soon'>;
-    image: Attribute.Media;
+    image: Attribute.String;
+    admin: Attribute.Relation<
+      'api::activity.activity',
+      'manyToOne',
+      'plugin::users-permissions.user'
+    >;
+    participants: Attribute.Relation<
+      'api::activity.activity',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -391,6 +401,36 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       Attribute.Private;
     updatedBy: Attribute.Relation<
       'api::activity.activity',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+  };
+}
+
+export interface ApiCategoryCategory extends Schema.CollectionType {
+  collectionName: 'categories';
+  info: {
+    singularName: 'category';
+    pluralName: 'categories';
+    displayName: 'Category';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  attributes: {
+    Title: Attribute.String;
+    image: Attribute.String;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::category.category',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::category.category',
       'oneToOne',
       'admin::user'
     > &
@@ -760,6 +800,16 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'plugin::users-permissions.role'
     >;
     phone: Attribute.String & Attribute.Required & Attribute.Unique;
+    admin_activities: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'oneToMany',
+      'api::activity.activity'
+    >;
+    activities: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::activity.activity'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -835,6 +885,7 @@ declare module '@strapi/types' {
       'admin::transfer-token': AdminTransferToken;
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::activity.activity': ApiActivityActivity;
+      'api::category.category': ApiCategoryCategory;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

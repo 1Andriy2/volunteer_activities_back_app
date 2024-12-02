@@ -37,6 +37,18 @@
     },
     "image": {
       "type": "string"
+    },
+    "admin": {
+      "type": "relation",
+      "relation": "manyToOne",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "admin_activities"
+    },
+    "participants": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "plugin::users-permissions.user",
+      "inversedBy": "activities"
     }
   }
 }

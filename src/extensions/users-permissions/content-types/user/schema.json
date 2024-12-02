@@ -69,6 +69,18 @@
       "type": "string",
       "required": true,
       "unique": true
+    },
+    "admin_activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "admin"
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "participants"
     }
   }
 }

@@ -419,12 +419,13 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
     singularName: 'category';
     pluralName: 'categories';
     displayName: 'Category';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
-    Title: Attribute.String;
+    title: Attribute.String;
     image: Attribute.String;
     activities: Attribute.Relation<
       'api::category.category',

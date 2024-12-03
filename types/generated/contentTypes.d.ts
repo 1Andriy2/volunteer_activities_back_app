@@ -391,6 +391,11 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
+    category: Attribute.Relation<
+      'api::activity.activity',
+      'manyToOne',
+      'api::category.category'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -421,6 +426,11 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   attributes: {
     Title: Attribute.String;
     image: Attribute.String;
+    activities: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::activity.activity'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

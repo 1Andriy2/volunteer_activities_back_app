@@ -16,6 +16,12 @@
     },
     "image": {
       "type": "string"
+    },
+    "activities": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::activity.activity",
+      "mappedBy": "category"
     }
   }
 }

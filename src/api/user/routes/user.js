@@ -9,5 +9,10 @@ module.exports = {
         middlewares: [],
       },
     },
+    {
+      method: "PUT",
+      path: "/users/:id/push-token",
+      handler: "user.updatePushToken" 
+    }
   ],
 };

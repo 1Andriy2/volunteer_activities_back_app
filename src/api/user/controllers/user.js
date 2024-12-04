@@ -40,4 +40,11 @@ module.exports = {
       },
     });
   },
+  async updatePushToken(ctx) {
+    const { id } = ctx.params;
+    const { pushToken } = ctx.request.body;
+
+    const updatedUser = await strapi.query('plugin::users-permissions.user').update({ where: { id }, data: { pushToken } });
+    return ctx.send(updatedUser);
+  },
 };

@@ -118,6 +118,9 @@
       "relation": "manyToMany",
       "target": "api::interest.interest",
       "inversedBy": "users"
+    },
+    "pushToken": {
+      "type": "string"
     }
   }
 }

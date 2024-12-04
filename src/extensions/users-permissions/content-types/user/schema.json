@@ -81,6 +81,43 @@
       "relation": "manyToMany",
       "target": "api::activity.activity",
       "mappedBy": "participants"
+    },
+    "age": {
+      "type": "integer",
+      "min": 0,
+      "max": 150
+    },
+    "gender": {
+      "type": "enumeration",
+      "enum": [
+        "male",
+        "female",
+        "other"
+      ]
+    },
+    "status": {
+      "type": "enumeration",
+      "enum": [
+        "student",
+        "employed",
+        "unemployed",
+        "retired"
+      ]
+    },
+    "location": {
+      "type": "json"
+    },
+    "skills": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::skill.skill",
+      "inversedBy": "users"
+    },
+    "interests": {
+      "type": "relation",
+      "relation": "manyToMany",
+      "target": "api::interest.interest",
+      "inversedBy": "users"
     }
   }
 }

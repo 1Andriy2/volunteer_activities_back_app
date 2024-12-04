@@ -449,6 +449,108 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   };
 }
 
+export interface ApiInterestInterest extends Schema.CollectionType {
+  collectionName: 'interests';
+  info: {
+    singularName: 'interest';
+    pluralName: 'interests';
+    displayName: 'Interest';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    users: Attribute.Relation<
+      'api::interest.interest',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::interest.interest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::interest.interest',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::interest.interest',
+      'oneToMany',
+      'api::interest.interest'
+    >;
+    locale: Attribute.String;
+  };
+}
+
+export interface ApiSkillSkill extends Schema.CollectionType {
+  collectionName: 'skills';
+  info: {
+    singularName: 'skill';
+    pluralName: 'skills';
+    displayName: 'Skill';
+  };
+  options: {
+    draftAndPublish: false;
+  };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
+  attributes: {
+    name: Attribute.String &
+      Attribute.Required &
+      Attribute.Unique &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    users: Attribute.Relation<
+      'api::skill.skill',
+      'manyToMany',
+      'plugin::users-permissions.user'
+    >;
+    createdAt: Attribute.DateTime;
+    updatedAt: Attribute.DateTime;
+    createdBy: Attribute.Relation<
+      'api::skill.skill',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    updatedBy: Attribute.Relation<
+      'api::skill.skill',
+      'oneToOne',
+      'admin::user'
+    > &
+      Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::skill.skill',
+      'oneToMany',
+      'api::skill.skill'
+    >;
+    locale: Attribute.String;
+  };
+}
+
 export interface PluginUploadFile extends Schema.CollectionType {
   collectionName: 'files';
   info: {
@@ -821,6 +923,29 @@ export interface PluginUsersPermissionsUser extends Schema.CollectionType {
       'manyToMany',
       'api::activity.activity'
     >;
+    age: Attribute.Integer &
+      Attribute.SetMinMax<
+        {
+          min: 0;
+          max: 150;
+        },
+        number
+      >;
+    gender: Attribute.Enumeration<['male', 'female', 'other']>;
+    status: Attribute.Enumeration<
+      ['student', 'employed', 'unemployed', 'retired']
+    >;
+    location: Attribute.JSON;
+    skills: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::skill.skill'
+    >;
+    interests: Attribute.Relation<
+      'plugin::users-permissions.user',
+      'manyToMany',
+      'api::interest.interest'
+    >;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<
@@ -897,6 +1022,8 @@ declare module '@strapi/types' {
       'admin::transfer-token-permission': AdminTransferTokenPermission;
       'api::activity.activity': ApiActivityActivity;
       'api::category.category': ApiCategoryCategory;
+      'api::interest.interest': ApiInterestInterest;
+      'api::skill.skill': ApiSkillSkill;
       'plugin::upload.file': PluginUploadFile;
       'plugin::upload.folder': PluginUploadFolder;
       'plugin::content-releases.release': PluginContentReleasesRelease;

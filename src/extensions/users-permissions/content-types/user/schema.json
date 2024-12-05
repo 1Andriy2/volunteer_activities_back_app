@@ -121,6 +121,12 @@
     },
     "pushToken": {
       "type": "string"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback",
+      "mappedBy": "user_id"
     }
   }
 }

@@ -55,6 +55,12 @@
       "relation": "manyToOne",
       "target": "api::category.category",
       "inversedBy": "activities"
+    },
+    "feedbacks": {
+      "type": "relation",
+      "relation": "oneToMany",
+      "target": "api::feedback.feedback",
+      "mappedBy": "activity_id"
     }
   }
 }

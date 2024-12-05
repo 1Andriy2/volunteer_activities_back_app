@@ -60,7 +60,7 @@
       "type": "relation",
       "relation": "oneToMany",
       "target": "api::feedback.feedback",
-      "mappedBy": "activity_id"
+      "mappedBy": "activity"
     }
   }
 }

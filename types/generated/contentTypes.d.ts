@@ -925,18 +925,19 @@ export interface ApiFeedbackFeedback extends Schema.CollectionType {
     singularName: 'feedback';
     pluralName: 'feedbacks';
     displayName: 'Feedback';
+    description: '';
   };
   options: {
     draftAndPublish: false;
   };
   attributes: {
     message: Attribute.Text & Attribute.Required;
-    user_id: Attribute.Relation<
+    user: Attribute.Relation<
       'api::feedback.feedback',
       'manyToOne',
       'plugin::users-permissions.user'
     >;
-    activity_id: Attribute.Relation<
+    activity: Attribute.Relation<
       'api::feedback.feedback',
       'manyToOne',
       'api::activity.activity'

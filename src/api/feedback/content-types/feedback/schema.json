@@ -4,7 +4,8 @@
   "info": {
     "singularName": "feedback",
     "pluralName": "feedbacks",
-    "displayName": "Feedback"
+    "displayName": "Feedback",
+    "description": ""
   },
   "options": {
     "draftAndPublish": false
@@ -15,13 +16,13 @@
       "type": "text",
       "required": true
     },
-    "user_id": {
+    "user": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "plugin::users-permissions.user",
       "inversedBy": "feedbacks"
     },
-    "activity_id": {
+    "activity": {
       "type": "relation",
       "relation": "manyToOne",
       "target": "api::activity.activity",

@@ -10,9 +10,12 @@ module.exports = {
       },
     },
     {
-      method: "PUT",
-      path: "/users/:id/push-token",
-      handler: "user.updatePushToken" 
-    }
+      method: 'POST',
+      path: '/users/:id/push-token',
+      handler: 'user.updatePushToken',
+      config: {
+        policies: [],
+      },
+    },
   ],
 };

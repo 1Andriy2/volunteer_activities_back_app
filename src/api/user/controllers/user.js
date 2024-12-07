@@ -44,7 +44,31 @@ module.exports = {
     const { id } = ctx.params;
     const { pushToken } = ctx.request.body;
 
-    const updatedUser = await strapi.query('plugin::users-permissions.user').update({ where: { id }, data: { pushToken } });
-    return ctx.send(updatedUser);
+    if (!pushToken) {
+      return ctx.badRequest('expoPushToken is required');
+    }
+
+    const user = await strapi.entityService.update('plugin::users-permissions.user', id, {
+      data: { pushToken },
+    });
+
+    return user;
+  },
+  async notifyUsers(ctx) {
+    const { title, body, data } = ctx.request.body;
+
+    // Отримати всіх користувачів із токенами
+    const users = await strapi.entityService.findMany('plugin::users-permissions.user', {
+      filters: { pushToken: { $notNull: true } },
+    });
+
+    const tokens = users.map(user => user.pushToken);
+
+    if (tokens.length > 0) {
+      await strapi.services['api::user.user'].sendPushNotification(tokens, title, body, data);
+      ctx.send({ message: 'Notifications sent successfully.' });
+    } else {
+      ctx.send({ message: 'No users with valid tokens.' });
+    }
   },
 };

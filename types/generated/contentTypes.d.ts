@@ -838,14 +838,51 @@ export interface ApiActivityActivity extends Schema.CollectionType {
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String & Attribute.Required;
-    description: Attribute.Text;
-    coords: Attribute.JSON;
-    date: Attribute.DateTime & Attribute.Required;
+    title: Attribute.String &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    description: Attribute.Text &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    coords: Attribute.JSON &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
+    date: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     status: Attribute.Enumeration<['soon', 'active', 'completed']> &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }> &
       Attribute.DefaultTo<'soon'>;
-    image: Attribute.String;
+    image: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     admin: Attribute.Relation<
       'api::activity.activity',
       'manyToOne',
@@ -856,9 +893,9 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'manyToMany',
       'plugin::users-permissions.user'
     >;
-    category: Attribute.Relation<
+    categories: Attribute.Relation<
       'api::activity.activity',
-      'manyToOne',
+      'manyToMany',
       'api::category.category'
     >;
     feedbacks: Attribute.Relation<
@@ -880,6 +917,12 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::activity.activity',
+      'oneToMany',
+      'api::activity.activity'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -894,12 +937,27 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    title: Attribute.String;
-    image: Attribute.String;
+    title: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
+    image: Attribute.String &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: false;
+        };
+      }>;
     activities: Attribute.Relation<
       'api::category.category',
-      'oneToMany',
+      'manyToMany',
       'api::activity.activity'
     >;
     createdAt: Attribute.DateTime;
@@ -916,6 +974,12 @@ export interface ApiCategoryCategory extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::category.category',
+      'oneToMany',
+      'api::category.category'
+    >;
+    locale: Attribute.String;
   };
 }
 
@@ -930,8 +994,19 @@ export interface ApiFeedbackFeedback extends Schema.CollectionType {
   options: {
     draftAndPublish: false;
   };
+  pluginOptions: {
+    i18n: {
+      localized: true;
+    };
+  };
   attributes: {
-    message: Attribute.Text & Attribute.Required;
+    message: Attribute.Text &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     user: Attribute.Relation<
       'api::feedback.feedback',
       'manyToOne',
@@ -956,6 +1031,12 @@ export interface ApiFeedbackFeedback extends Schema.CollectionType {
       'admin::user'
     > &
       Attribute.Private;
+    localizations: Attribute.Relation<
+      'api::feedback.feedback',
+      'oneToMany',
+      'api::feedback.feedback'
+    >;
+    locale: Attribute.String;
   };
 }
 

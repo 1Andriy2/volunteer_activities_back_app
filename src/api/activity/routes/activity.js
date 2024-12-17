@@ -7,7 +7,7 @@ module.exports = {
       {
         method: 'GET',
         path: '/activities/recommendations',
-        handler: 'activity.recommendations', // цей метод повинен відповідати вашому методу в контролері
+        handler: 'activity.recommendations', 
         config: {
           policies: [],
           middlewares: [],
@@ -20,6 +20,9 @@ module.exports = {
           try {
             const activities = await strapi.entityService.findMany(
               'api::activity.activity',
+              {
+                populate: '*', 
+              }
             );
             ctx.body = activities; 
           } catch (error) {

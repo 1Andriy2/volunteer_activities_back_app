@@ -41,7 +41,7 @@
         }
       }
     },
-    "date": {
+    "startDate": {
       "type": "datetime",
       "required": true,
       "pluginOptions": {
@@ -95,6 +95,15 @@
       "relation": "oneToMany",
       "target": "api::feedback.feedback",
       "mappedBy": "activity"
+    },
+    "endDate": {
+      "pluginOptions": {
+        "i18n": {
+          "localized": true
+        }
+      },
+      "type": "datetime",
+      "required": true
     }
   }
 }

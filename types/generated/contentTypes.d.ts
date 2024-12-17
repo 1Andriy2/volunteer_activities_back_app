@@ -863,7 +863,7 @@ export interface ApiActivityActivity extends Schema.CollectionType {
           localized: false;
         };
       }>;
-    date: Attribute.DateTime &
+    startDate: Attribute.DateTime &
       Attribute.Required &
       Attribute.SetPluginOptions<{
         i18n: {
@@ -903,6 +903,13 @@ export interface ApiActivityActivity extends Schema.CollectionType {
       'oneToMany',
       'api::feedback.feedback'
     >;
+    endDate: Attribute.DateTime &
+      Attribute.Required &
+      Attribute.SetPluginOptions<{
+        i18n: {
+          localized: true;
+        };
+      }>;
     createdAt: Attribute.DateTime;
     updatedAt: Attribute.DateTime;
     createdBy: Attribute.Relation<

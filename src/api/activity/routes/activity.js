@@ -13,6 +13,25 @@ module.exports = {
           middlewares: [],
         },
       },
+      {
+        method: 'GET',
+        path: '/activities',
+        handler: async (ctx) => {
+          try {
+            const activities = await strapi.entityService.findMany(
+              'api::activity.activity',
+            );
+            ctx.body = activities; 
+          } catch (error) {
+            ctx.status = 500;
+            ctx.body = { error: 'Не вдалося отримати активності', details: error.message };
+          }
+        },
+        config: {
+          policies: [],
+          middlewares: [],
+        },
+      },
     ],
   };
   
